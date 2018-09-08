@@ -1,0 +1,73 @@
+services:
+    cwd_messaging.event_bus:
+        class: Cwd\MessagingBundle\MessageBus\EventBus
+        public: false
+
+    cwd_messaging.event_bus.event_name_resolver:
+        class: SimpleBus\Message\Name\ClassBasedNameResolver
+        public: false
+
+    cwd_messaging.event_bus.events.finishes_message_before_handling_next_middleware:
+        class: SimpleBus\Message\Bus\Middleware\FinishesHandlingMessageBeforeHandlingNext
+        public: false
+        tags:
+            - { name: cwd_messaging.event_bus_middleware, priority: 1000 }
+
+    cwd_messaging.event_bus.resolves_handler_descriptors_middleware:
+        class: Cwd\MessagingBundle\MessageBus\Middleware\ResolvesHandlerDescriptors
+        public: false
+        arguments:
+            - '@cwd_messaging.event_bus.predefined_handler_descriptor_resolver'
+        tags:
+            - { name: cwd_messaging.event_bus_middleware, priority: 900 }
+
+    cwd_messaging.event_bus.invokes_handlers_middleware:
+        class: Cwd\MessagingBundle\MessageBus\Middleware\InvokesHandlers
+        public: false
+        arguments:
+            - '@cwd_messaging.event_bus.handler_invoker'
+        # Tags are added by the extension only in case async is not loaded
+
+    # Handler Descriptor Resolver
+
+    cwd_messaging.event_bus.predefined_handler_descriptor_resolver:
+        class: Cwd\MessagingBundle\HandlerDescriptor\DescriptorResolver\PredefinedHandlerDescriptorResolver
+        public: false
+        arguments:
+            - '@cwd_messaging.event_bus.event_name_resolver'
+
+    # Handler Invoker
+
+    cwd_messaging.event_bus.handler_invoker:
+        class: Cwd\MessagingBundle\HandlerInvoker\HandlerInvokerSupportingMiddleware
+        public: false
+        arguments:
+            - []
+
+    cwd_messaging.event_bus.handler_invoker.throttles_handler_invocation_middleware:
+        class: Cwd\MessagingBundle\HandlerInvoker\Middleware\ThrottlesHandlerInvocation
+        public: false
+        tags:
+            - { name: cwd_messaging.event_handler_invoker_middleware, priority: 200 }
+
+    cwd_messaging.event_bus.handler_invoker.invokes_container_service_methods_middleware:
+        class: Cwd\MessagingBundle\HandlerInvoker\Middleware\InvokesContainerServiceMethods
+        public: false
+        arguments:
+            - '@service_container'
+        tags:
+            - { name: cwd_messaging.event_handler_invoker_middleware }
+
+    # Event Recorder
+
+    cwd_messaging.event_bus.aggregates_recorded_messages:
+        class: SimpleBus\Message\Recorder\AggregatesRecordedMessages
+        public: false
+        arguments:
+            - []
+
+    cwd_messaging.event_bus.public_event_recorder:
+        class: SimpleBus\Message\Recorder\PublicMessageRecorder
+        public: false
+        tags:
+            - { name: cwd_messaging.event_recorder }

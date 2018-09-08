@@ -1,0 +1,5 @@
+services:
+    cwd_messaging.asynchronous.wrapped_messaage_with_handler_descriptors_normalizer:
+        class: Cwd\MessagingBundle\Serializer\WrappedMessageWithHandlerDescriptorsNormalizer
+        tags:
+            - { name: serializer.normalizer }

@@ -1,0 +1,50 @@
+services:
+
+    # Regular event bus middleware
+
+    cwd_messaging.event_bus.publishes_async_messages_middleware:
+        class: Cwd\MessagingBundle\MessageBus\Middleware\PublishesAsyncMessages
+        public: false
+        arguments:
+            - '@cwd_messaging.asynchronous.publisher'
+            - '@security.token_storage'
+        tags:
+            - { name: cwd_messaging.event_bus_middleware }
+
+    cwd_messaging.event_bus.invokes_handlers_supporting_retry_middleware:
+        class: Cwd\MessagingBundle\MessageBus\Middleware\InvokesHandlersSupportingRetry
+        public: false
+        arguments:
+            - '@cwd_messaging.event_bus.handler_invoker'
+            - '@cwd_messaging.asynchronous.publisher'
+            - '@?sentry.client'
+            - '@logger'
+        tags:
+            - { name: cwd_messaging.event_bus_middleware, priority: -1000 }
+
+    # Asynchronous event bus
+    
+    cwd_messaging.asynchronous.event_bus:
+        class: Cwd\MessagingBundle\MessageBus\EventBus
+        public: true
+        tags:
+            - { name: cwd_messaging.asynchronous_message_bus, qualifier: Cwd\MessagingBundle\Qualifier\Event }
+
+    cwd_messaging.asynchronous.event_bus.events.finishes_message_before_handling_next_middleware:
+        class: SimpleBus\Message\Bus\Middleware\FinishesHandlingMessageBeforeHandlingNext
+        public: false
+        tags:
+            - { name: cwd_messaging.asynchronous_event_bus_middleware, priority: 1000 }
+
+    # No handler descriptor resolving - async events are resolved already
+
+    cwd_messaging.asynchronous.event_bus.invokes_handlers_supporting_retry_middleware:
+        class: Cwd\MessagingBundle\MessageBus\Middleware\InvokesHandlersSupportingRetry
+        public: false
+        arguments:
+            - '@cwd_messaging.event_bus.handler_invoker'
+            - '@cwd_messaging.asynchronous.publisher'
+            - '@?sentry.client'
+            - '@logger'
+        tags:
+            - { name: cwd_messaging.asynchronous_event_bus_middleware, priority: -1000 }

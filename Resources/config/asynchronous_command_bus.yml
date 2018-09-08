@@ -1,0 +1,62 @@
+parameters:
+    cwd_messaging.asynchronous.command_bus.unhandled_messages_log_level: debug
+
+services:
+
+    # Regular command bus middleware
+
+    cwd_messaging.command_bus.publishes_async_messages_middleware:
+        class: Cwd\MessagingBundle\MessageBus\Middleware\PublishesAsyncMessages
+        public: false
+        arguments:
+            - '@cwd_messaging.asynchronous.publisher'
+            - '@security.token_storage'
+        tags:
+            - { name: cwd_messaging.command_bus_middleware }
+
+    cwd_messaging.command_bus.invokes_handlers_supporting_retry_middleware:
+        class: Cwd\MessagingBundle\MessageBus\Middleware\InvokesHandlersSupportingRetry
+        public: false
+        arguments:
+            - '@cwd_messaging.command_bus.handler_invoker'
+            - '@cwd_messaging.asynchronous.publisher'
+            - '@?sentry.client'
+            - '@logger'
+        tags:
+            - { name: cwd_messaging.command_bus_middleware, priority: -1000 }
+
+    # Asynchronous command bus
+
+    cwd_messaging.asynchronous.command_bus:
+        class: Cwd\MessagingBundle\MessageBus\CommandBus
+        public: true
+        tags:
+            - { name: cwd_messaging.asynchronous_message_bus, qualifier: Cwd\MessagingBundle\Qualifier\Command }
+
+    cwd_messaging.asynchronous.command_bus.finishes_command_before_handling_next_middleware:
+        class: SimpleBus\Message\Bus\Middleware\FinishesHandlingMessageBeforeHandlingNext
+        public: false
+        tags:
+            - { name: cwd_messaging.asynchronous_command_bus_middleware, priority: 1000 }
+
+    cwd_messaging.asynchronous.command_bus.handles_recorded_messages_middleware:
+        class: SimpleBus\Message\Recorder\HandlesRecordedMessagesMiddleware
+        public: false
+        arguments:
+            - '@cwd_messaging.command_bus.handler_invoker.collects_event_originators_middleware'
+            - '@cwd_messaging.event_bus'
+        tags:
+            - { name: cwd_messaging.asynchronous_command_bus_middleware, priority: 300 }
+
+    # No handler descriptor resolving - async commands are resolved already
+
+    cwd_messaging.asynchronous.command_bus.invokes_handlers_supporting_retry_middleware:
+        class: Cwd\MessagingBundle\MessageBus\Middleware\InvokesHandlersSupportingRetry
+        public: false
+        arguments:
+            - '@cwd_messaging.command_bus.handler_invoker'
+            - '@cwd_messaging.asynchronous.publisher'
+            - '@?sentry.client'
+            - '@logger'
+        tags:
+            - { name: cwd_messaging.asynchronous_command_bus_middleware, priority: -1000 }

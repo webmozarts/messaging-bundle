@@ -1,0 +1,5 @@
+services:
+
+    cwd_messaging.channel_registry:
+        class: Cwd\MessagingBundle\Channel\Registry\ChannelRegistry
+        public: true
