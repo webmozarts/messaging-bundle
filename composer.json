@@ -1,5 +1,5 @@
 {
-    "name": "cwd/data-doctrine-orm-bundle",
+    "name": "cwd/messaging-bundle",
     "description": "Supports synchronous and asynchrounous messaging",
     "type": "library",
     "license": "MIT",
