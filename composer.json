@@ -22,7 +22,7 @@
     ],
     "require": {
         "php": ">=7.1.0",
-        "cwd/data-bundle": "^0.1",
+        "cwd/data-bundle": "^0.2",
         "symfony/dependency-injection": "^3.2",
         "symfony/http-kernel": "^3.2",
         "symfony/filesystem": "^3.2",
