@@ -129,8 +129,6 @@ class InvokesHandlersSupportingRetry implements MessageBusMiddleware
                         'failed_times' => $failedTimes,
                         'retry_times' => $retryTimes,
                     ]);
-
-                    throw $e;   // TODO: remove this after the import is done
                 }
 
                 if (null !== $this->sentryClient) {

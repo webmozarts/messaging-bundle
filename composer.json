@@ -1,6 +1,6 @@
 {
     "name": "webmozarts/messaging-bundle",
-    "description": "Supports synchronous and asynchrounous messaging",
+    "description": "Synchronous and asynchronous messaging with a rich configuration API",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -27,15 +27,20 @@
         "symfony/expression-language": "^3.2",
         "doctrine/annotations": "^1.6",
         "simple-bus/asynchronous": "^3.0",
-        "simple-bus/doctrine-orm-bridge": "^5.0",
         "simple-bus/message-bus": "^3.0",
-        "php-amqplib/rabbitmq-bundle": "^1.12",
         "nikic/iter": "^1.5",
         "webmozart/assert": "^1.3",
-        "psr/log": "^1.0",
-        "sentry/sentry": "^1.8"
+        "psr/log": "^1.0"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.13"
+        "friendsofphp/php-cs-fixer": "^2.13",
+        "php-amqplib/rabbitmq-bundle": "^1.12",
+        "simple-bus/doctrine-orm-bridge": "^5.0",
+        "sentry/sentry": "^1.8"
+    },
+    "suggest": {
+        "php-amqplib/rabbitmq-bundle": "For using RabbitMQ as transport",
+        "simple-bus/doctrine-orm-bridge": "For automatically starting and committing Doctrine transactions and collecting events from Doctrine entities",
+        "sentry/sentry": "For error logging to Sentry"
     }
 }
