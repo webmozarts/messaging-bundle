@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the ÖWM API.
+ * This file is part of the Webmozarts Messaging Bundle.
  *
- * (c) 2016-2018 cwd.at GmbH <office@cwd.at>
+ * (c) 2016-2019 Bernhard Schussek <bernhard.schussek@webmozarts.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,12 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Cwd\MessagingBundle\HandlerInvoker\Middleware;
+namespace Webmozarts\MessagingBundle\HandlerInvoker\Middleware;
 
-use Cwd\DataBundle\Id\Identifiable;
-use Cwd\MessagingBundle\Annotation\MetadataResolver\RunAsMetadataResolver;
-use Cwd\MessagingBundle\HandlerDescriptor\HandlerDescriptor;
-use Cwd\MessagingBundle\Message\WrappedMessageWithMetadata;
+use Webmozarts\MessagingBundle\Annotation\MetadataResolver\RunAsMetadataResolver;
+use Webmozarts\MessagingBundle\HandlerDescriptor\HandlerDescriptor;
+use Webmozarts\MessagingBundle\Message\WrappedMessageWithMetadata;
 use SimpleBus\Message\Recorder\ContainsRecordedMessages;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -50,7 +49,7 @@ class CollectsEventOriginators implements ContainsRecordedMessages, HandlerInvok
         $next($message, $handlerDescriptor);
 
         foreach ($this->messageRecorder->recordedMessages() as $recordedMessage) {
-            $this->messages[] = $user instanceof Identifiable
+            $this->messages[] = method_exists($user, 'getId')
                 ? new WrappedMessageWithMetadata(
                     $recordedMessage,
                     [RunAsMetadataResolver::USER_ID => (string) $user->getId()]

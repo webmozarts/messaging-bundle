@@ -1,13 +1,13 @@
 parameters:
-    cwd_messaging.asynchronous.command_bus.logging.level: debug
+    webmozarts_messaging.asynchronous.command_bus.logging.level: debug
 
 services:
-    cwd_messaging.asynchronous.command_bus.logging_middleware:
+    webmozarts_messaging.asynchronous.command_bus.logging_middleware:
         class: SimpleBus\Message\Logging\LoggingMiddleware
         public: false
         arguments:
             - '@logger'
-            - '%cwd_messaging.asynchronous.command_bus.logging.level%'
+            - '%webmozarts_messaging.asynchronous.command_bus.logging.level%'
         tags:
             - { name: monolog.logger, channel: asynchronous_command_bus }
-            - { name: cwd_messaging.asynchronous_command_bus_middleware, priority: -999 }
+            - { name: webmozarts_messaging.asynchronous_command_bus_middleware, priority: -999 }

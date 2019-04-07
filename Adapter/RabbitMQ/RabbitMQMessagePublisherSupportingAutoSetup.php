@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the ÖWM API.
+ * This file is part of the Webmozarts Messaging Bundle.
  *
- * (c) 2016-2018 cwd.at GmbH <office@cwd.at>
+ * (c) 2016-2019 Bernhard Schussek <bernhard.schussek@webmozarts.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,15 +11,15 @@
 
 declare(strict_types=1);
 
-namespace Cwd\MessagingBundle\Adapter\RabbitMQ;
+namespace Webmozarts\MessagingBundle\Adapter\RabbitMQ;
 
-use Cwd\MessagingBundle\Annotation\MetadataResolver\ChannelMetadataResolver;
-use Cwd\MessagingBundle\Annotation\MetadataResolver\RetryMetadataResolver;
-use Cwd\MessagingBundle\Channel\Channel;
-use Cwd\MessagingBundle\Channel\Registry\ChannelRegistry;
-use Cwd\MessagingBundle\HandlerDescriptor\HandlerDescriptor;
-use Cwd\MessagingBundle\Message\WrappedMessageWithHandlerDescriptors;
-use Cwd\MessagingBundle\Routing\RoutingKeyResolver;
+use Webmozarts\MessagingBundle\Annotation\MetadataResolver\ChannelMetadataResolver;
+use Webmozarts\MessagingBundle\Annotation\MetadataResolver\RetryMetadataResolver;
+use Webmozarts\MessagingBundle\Channel\Channel;
+use Webmozarts\MessagingBundle\Channel\Registry\ChannelRegistry;
+use Webmozarts\MessagingBundle\HandlerDescriptor\HandlerDescriptor;
+use Webmozarts\MessagingBundle\Message\WrappedMessageWithHandlerDescriptors;
+use Webmozarts\MessagingBundle\Routing\RoutingKeyResolver;
 use OldSound\RabbitMqBundle\RabbitMq\Producer;
 use RuntimeException;
 use SimpleBus\Asynchronous\Properties\AdditionalPropertiesResolver;

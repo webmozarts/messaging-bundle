@@ -1,23 +1,23 @@
 parameters:
-    cwd_messaging.doctrine_orm.entity_manager: default
+    webmozarts_messaging.doctrine_orm.entity_manager: default
 
 services:
-    cwd_messaging.doctrine_orm.wraps_next_command_in_transaction_middleware:
-        class: Cwd\MessagingBundle\Adapter\ORM\WrapsMessageHandlingInTransaction
+    webmozarts_messaging.doctrine_orm.wraps_next_command_in_transaction_middleware:
+        class: Webmozarts\MessagingBundle\Adapter\ORM\WrapsMessageHandlingInTransaction
         public: false
         arguments:
             - '@doctrine'
-            - '%cwd_messaging.doctrine_orm.entity_manager%'
+            - '%webmozarts_messaging.doctrine_orm.entity_manager%'
         tags:
             # One transaction per command including synchronous events
-            - { name: cwd_messaging.command_bus_middleware, priority: 950 }
-            - { name: cwd_messaging.asynchronous_command_bus_middleware, priority: 950 }
+            - { name: webmozarts_messaging.command_bus_middleware, priority: 950 }
+            - { name: webmozarts_messaging.asynchronous_command_bus_middleware, priority: 950 }
             # Asynchronous events don't run in the transaction of their command
-            - { name: cwd_messaging.asynchronous_event_bus_middleware, priority: 950 }
+            - { name: webmozarts_messaging.asynchronous_event_bus_middleware, priority: 950 }
 
-    cwd_messaging.doctrine_orm.collects_events_from_entities:
+    webmozarts_messaging.doctrine_orm.collects_events_from_entities:
         class: SimpleBus\DoctrineORMBridge\EventListener\CollectsEventsFromEntities
         public: false
         tags:
             - { name: doctrine.event_subscriber }
-            - { name: cwd_messaging.event_recorder }
+            - { name: webmozarts_messaging.event_recorder }

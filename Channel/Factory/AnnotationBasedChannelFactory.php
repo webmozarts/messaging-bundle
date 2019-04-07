@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the ÖWM API.
+ * This file is part of the Webmozarts Messaging Bundle.
  *
- * (c) 2016-2018 cwd.at GmbH <office@cwd.at>
+ * (c) 2016-2019 Bernhard Schussek <bernhard.schussek@webmozarts.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,16 +11,16 @@
 
 declare(strict_types=1);
 
-namespace Cwd\MessagingBundle\Channel\Factory;
+namespace Webmozarts\MessagingBundle\Channel\Factory;
 
 use Doctrine\Common\Annotations\AnnotationReader;
-use Cwd\MessagingBundle\Channel\Channel;
-use Cwd\MessagingBundle\Channel\Partition;
+use Webmozarts\MessagingBundle\Channel\Channel;
+use Webmozarts\MessagingBundle\Channel\Partition;
 use ReflectionClass;
 use ReflectionMethod;
-use Cwd\MessagingBundle\Annotation\Channel as ChannelAnnotation;
-use Cwd\MessagingBundle\Annotation\Partitions as PartitionsAnnotation;
-use Cwd\MessagingBundle\Annotation\Partition as PartitionAnnotation;
+use Webmozarts\MessagingBundle\Annotation\Channel as ChannelAnnotation;
+use Webmozarts\MessagingBundle\Annotation\Partitions as PartitionsAnnotation;
+use Webmozarts\MessagingBundle\Annotation\Partition as PartitionAnnotation;
 
 class AnnotationBasedChannelFactory
 {

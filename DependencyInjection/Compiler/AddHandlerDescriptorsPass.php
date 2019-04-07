@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the ÖWM API.
+ * This file is part of the Webmozarts Messaging Bundle.
  *
- * (c) 2016-2018 cwd.at GmbH <office@cwd.at>
+ * (c) 2016-2019 Bernhard Schussek <bernhard.schussek@webmozarts.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,13 +11,13 @@
 
 declare(strict_types=1);
 
-namespace Cwd\MessagingBundle\DependencyInjection\Compiler;
+namespace Webmozarts\MessagingBundle\DependencyInjection\Compiler;
 
-use Cwd\MessagingBundle\Channel\Channel;
-use Cwd\MessagingBundle\Channel\Factory\AnnotationBasedChannelFactory;
-use Cwd\MessagingBundle\Channel\Partition;
-use Cwd\MessagingBundle\HandlerDescriptor\ServiceMethodHandlerDescriptor;
-use Cwd\MessagingBundle\MetadataResolver\MetadataResolver;
+use Webmozarts\MessagingBundle\Channel\Channel;
+use Webmozarts\MessagingBundle\Channel\Factory\AnnotationBasedChannelFactory;
+use Webmozarts\MessagingBundle\Channel\Partition;
+use Webmozarts\MessagingBundle\HandlerDescriptor\ServiceMethodHandlerDescriptor;
+use Webmozarts\MessagingBundle\MetadataResolver\MetadataResolver;
 use function iter\fn\method;
 use ReflectionClass;
 use ReflectionMethod;

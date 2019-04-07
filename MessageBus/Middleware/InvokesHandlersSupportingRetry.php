@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the ÖWM API.
+ * This file is part of the Webmozarts Messaging Bundle.
  *
- * (c) 2016-2018 cwd.at GmbH <office@cwd.at>
+ * (c) 2016-2019 Bernhard Schussek <bernhard.schussek@webmozarts.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Cwd\MessagingBundle\MessageBus\Middleware;
+namespace Webmozarts\MessagingBundle\MessageBus\Middleware;
 
-use Cwd\MessagingBundle\Annotation\MetadataResolver\RetryMetadataResolver;
-use Cwd\MessagingBundle\HandlerInvoker\HandlerInvoker;
-use Cwd\MessagingBundle\Message\WrappedMessageWithHandlerDescriptors;
+use Webmozarts\MessagingBundle\Annotation\MetadataResolver\RetryMetadataResolver;
+use Webmozarts\MessagingBundle\HandlerInvoker\HandlerInvoker;
+use Webmozarts\MessagingBundle\Message\WrappedMessageWithHandlerDescriptors;
 use Exception;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;

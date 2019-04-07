@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the ÖWM API.
+ * This file is part of the Webmozarts Messaging Bundle.
  *
- * (c) 2016-2018 cwd.at GmbH <office@cwd.at>
+ * (c) 2016-2019 Bernhard Schussek <bernhard.schussek@webmozarts.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Cwd\MessagingBundle\MessageBus\Middleware;
+namespace Webmozarts\MessagingBundle\MessageBus\Middleware;
 
-use Cwd\MessagingBundle\Annotation\MetadataResolver\AsyncMetadataResolver;
-use Cwd\MessagingBundle\Annotation\MetadataResolver\RunAsMetadataResolver;
-use Cwd\MessagingBundle\Message\WrappedMessageWithHandlerDescriptors;
+use Webmozarts\MessagingBundle\Annotation\MetadataResolver\AsyncMetadataResolver;
+use Webmozarts\MessagingBundle\Annotation\MetadataResolver\RunAsMetadataResolver;
+use Webmozarts\MessagingBundle\Message\WrappedMessageWithHandlerDescriptors;
 use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;

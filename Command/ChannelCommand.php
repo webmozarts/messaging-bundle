@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the ÖWM API.
+ * This file is part of the Webmozarts Messaging Bundle.
  *
- * (c) 2016-2018 cwd.at GmbH <office@cwd.at>
+ * (c) 2016-2019 Bernhard Schussek <bernhard.schussek@webmozarts.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Cwd\MessagingBundle\Command;
+namespace Webmozarts\MessagingBundle\Command;
 
 use function iter\fn\method;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -32,7 +32,7 @@ class ChannelCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $channelRegistry = $this->getContainer()->get('cwd_messaging.channel_registry');
+        $channelRegistry = $this->getContainer()->get('webmozarts_messaging.channel_registry');
         $channels = $channelRegistry->getChannels();
         $lineFormat = '%-20s %s';
 

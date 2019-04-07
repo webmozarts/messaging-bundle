@@ -1,88 +1,88 @@
 services:
     # Command Bus
 
-    cwd_messaging.command_bus:
-        class: Cwd\MessagingBundle\MessageBus\CommandBus
+    webmozarts_messaging.command_bus:
+        class: Webmozarts\MessagingBundle\MessageBus\CommandBus
         public: false
         arguments:
             - []
 
-    cwd_messaging.command_bus.command_name_resolver:
+    webmozarts_messaging.command_bus.command_name_resolver:
         class: SimpleBus\Message\Name\ClassBasedNameResolver
         public: false
 
-    cwd_messaging.command_bus.finishes_command_before_handling_next_middleware:
+    webmozarts_messaging.command_bus.finishes_command_before_handling_next_middleware:
         class: SimpleBus\Message\Bus\Middleware\FinishesHandlingMessageBeforeHandlingNext
         public: false
         tags:
-            - { name: cwd_messaging.command_bus_middleware, priority: 1000 }
+            - { name: webmozarts_messaging.command_bus_middleware, priority: 1000 }
 
-    cwd_messaging.command_bus.handles_recorded_messages_middleware:
+    webmozarts_messaging.command_bus.handles_recorded_messages_middleware:
         class: SimpleBus\Message\Recorder\HandlesRecordedMessagesMiddleware
         public: false
         arguments:
-            - '@cwd_messaging.command_bus.handler_invoker.collects_event_originators_middleware'
-            - '@cwd_messaging.event_bus'
+            - '@webmozarts_messaging.command_bus.handler_invoker.collects_event_originators_middleware'
+            - '@webmozarts_messaging.event_bus'
         tags:
-            - { name: cwd_messaging.command_bus_middleware, priority: 900 }
+            - { name: webmozarts_messaging.command_bus_middleware, priority: 900 }
 
-    cwd_messaging.command_bus.resolves_handler_descriptors_middleware:
-        class: Cwd\MessagingBundle\MessageBus\Middleware\ResolvesHandlerDescriptors
+    webmozarts_messaging.command_bus.resolves_handler_descriptors_middleware:
+        class: Webmozarts\MessagingBundle\MessageBus\Middleware\ResolvesHandlerDescriptors
         public: false
         arguments:
-            - '@cwd_messaging.command_bus.predefined_handler_descriptor_resolver'
+            - '@webmozarts_messaging.command_bus.predefined_handler_descriptor_resolver'
         tags:
-            - { name: cwd_messaging.command_bus_middleware, priority: 800 }
+            - { name: webmozarts_messaging.command_bus_middleware, priority: 800 }
 
-    cwd_messaging.command_bus.invokes_handlers_middleware:
-        class: Cwd\MessagingBundle\MessageBus\Middleware\InvokesHandlers
+    webmozarts_messaging.command_bus.invokes_handlers_middleware:
+        class: Webmozarts\MessagingBundle\MessageBus\Middleware\InvokesHandlers
         public: false
         arguments:
-            - '@cwd_messaging.command_bus.handler_invoker'
+            - '@webmozarts_messaging.command_bus.handler_invoker'
         # Tags are added by the extension only in case async is not loaded
 
     # Handler Descriptor Resolver
 
-    cwd_messaging.command_bus.predefined_handler_descriptor_resolver:
-        class: Cwd\MessagingBundle\HandlerDescriptor\DescriptorResolver\PredefinedHandlerDescriptorResolver
+    webmozarts_messaging.command_bus.predefined_handler_descriptor_resolver:
+        class: Webmozarts\MessagingBundle\HandlerDescriptor\DescriptorResolver\PredefinedHandlerDescriptorResolver
         public: false
         arguments:
-            - '@cwd_messaging.command_bus.command_name_resolver'
+            - '@webmozarts_messaging.command_bus.command_name_resolver'
 
     # Handler Invoker
 
-    cwd_messaging.command_bus.handler_invoker:
-        class: Cwd\MessagingBundle\HandlerInvoker\HandlerInvokerSupportingMiddleware
+    webmozarts_messaging.command_bus.handler_invoker:
+        class: Webmozarts\MessagingBundle\HandlerInvoker\HandlerInvokerSupportingMiddleware
         public: false
         arguments:
             - []
 
-    cwd_messaging.command_bus.handler_invoker.throttles_handler_invocation_middleware:
-        class: Cwd\MessagingBundle\HandlerInvoker\Middleware\ThrottlesHandlerInvocation
+    webmozarts_messaging.command_bus.handler_invoker.throttles_handler_invocation_middleware:
+        class: Webmozarts\MessagingBundle\HandlerInvoker\Middleware\ThrottlesHandlerInvocation
         public: false
         tags:
-            - { name: cwd_messaging.command_handler_invoker_middleware, priority: 200 }
+            - { name: webmozarts_messaging.command_handler_invoker_middleware, priority: 200 }
 
-    cwd_messaging.command_bus.handler_invoker.verifies_user_authorization_middleware:
-        class: Cwd\MessagingBundle\HandlerInvoker\Middleware\VerifiesUserAuthorization
+    webmozarts_messaging.command_bus.handler_invoker.verifies_user_authorization_middleware:
+        class: Webmozarts\MessagingBundle\HandlerInvoker\Middleware\VerifiesUserAuthorization
         public: false
         arguments: ['@security.authorization_checker']
         tags:
-            - { name: cwd_messaging.command_handler_invoker_middleware }
+            - { name: webmozarts_messaging.command_handler_invoker_middleware }
 
-    cwd_messaging.command_bus.handler_invoker.collects_event_originators_middleware:
-        class: Cwd\MessagingBundle\HandlerInvoker\Middleware\CollectsEventOriginators
+    webmozarts_messaging.command_bus.handler_invoker.collects_event_originators_middleware:
+        class: Webmozarts\MessagingBundle\HandlerInvoker\Middleware\CollectsEventOriginators
         public: false
         arguments:
-            - '@cwd_messaging.event_bus.aggregates_recorded_messages'
+            - '@webmozarts_messaging.event_bus.aggregates_recorded_messages'
             - '@security.token_storage'
         tags:
-            - { name: cwd_messaging.command_handler_invoker_middleware }
+            - { name: webmozarts_messaging.command_handler_invoker_middleware }
 
-    cwd_messaging.command_bus.handler_invoker.invokes_container_service_methods_middleware:
-        class: Cwd\MessagingBundle\HandlerInvoker\Middleware\InvokesContainerServiceMethods
+    webmozarts_messaging.command_bus.handler_invoker.invokes_container_service_methods_middleware:
+        class: Webmozarts\MessagingBundle\HandlerInvoker\Middleware\InvokesContainerServiceMethods
         public: false
         arguments:
             - '@service_container'
         tags:
-            - { name: cwd_messaging.command_handler_invoker_middleware }
+            - { name: webmozarts_messaging.command_handler_invoker_middleware }

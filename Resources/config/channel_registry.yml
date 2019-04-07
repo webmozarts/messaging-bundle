@@ -1,5 +1,5 @@
 services:
 
-    cwd_messaging.channel_registry:
-        class: Cwd\MessagingBundle\Channel\Registry\ChannelRegistry
+    webmozarts_messaging.channel_registry:
+        class: Webmozarts\MessagingBundle\Channel\Registry\ChannelRegistry
         public: true

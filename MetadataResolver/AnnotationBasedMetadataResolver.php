@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the ÖWM API.
+ * This file is part of the Webmozarts Messaging Bundle.
  *
- * (c) 2016-2018 cwd.at GmbH <office@cwd.at>
+ * (c) 2016-2019 Bernhard Schussek <bernhard.schussek@webmozarts.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 
-namespace Cwd\MessagingBundle\MetadataResolver;
+namespace Webmozarts\MessagingBundle\MetadataResolver;
 
 use Doctrine\Common\Annotations\AnnotationReader;
-use Cwd\MessagingBundle\Annotation\MetadataResolver\AnnotationMetadataResolver;
+use Webmozarts\MessagingBundle\Annotation\MetadataResolver\AnnotationMetadataResolver;
 use ReflectionClass;
 use ReflectionMethod;
 

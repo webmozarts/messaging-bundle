@@ -1,17 +1,17 @@
 parameters:
-    cwd_messaging.asynchronous.command_bus.unhandled_messages_log_level: debug
+    webmozarts_messaging.asynchronous.command_bus.unhandled_messages_log_level: debug
 
 services:
 
-    cwd_messaging.asynchronous.gateway:
-        class: Cwd\MessagingBundle\MessageGateway\QualifierBasedMessageGateway
+    webmozarts_messaging.asynchronous.gateway:
+        class: Webmozarts\MessagingBundle\MessageGateway\QualifierBasedMessageGateway
         public: false
         arguments:
             - '@service_container'
 
-    cwd_messaging.asynchronous.serialized_message_consumer:
-        class: Cwd\MessagingBundle\Consumer\SerializedMessageConsumer
+    webmozarts_messaging.asynchronous.serialized_message_consumer:
+        class: Webmozarts\MessagingBundle\Consumer\SerializedMessageConsumer
         public: false
         arguments:
             - '@serializer'
-            - '@cwd_messaging.asynchronous.gateway'
+            - '@webmozarts_messaging.asynchronous.gateway'

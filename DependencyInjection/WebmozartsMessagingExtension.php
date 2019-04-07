@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the ÖWM API.
+ * This file is part of the Webmozarts Messaging Bundle.
  *
- * (c) 2016-2018 cwd.at GmbH <office@cwd.at>
+ * (c) 2016-2019 Bernhard Schussek <bernhard.schussek@webmozarts.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,14 +11,14 @@
 
 declare(strict_types=1);
 
-namespace Cwd\MessagingBundle\DependencyInjection;
+namespace Webmozarts\MessagingBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
-class CwdMessagingExtension extends ConfigurableExtension
+class WebmozartsMessagingExtension extends ConfigurableExtension
 {
     /**
      * @var string
@@ -58,22 +58,22 @@ class CwdMessagingExtension extends ConfigurableExtension
                 $loader->load('rabbit_mq.yml');
 
                 $container->setAlias(
-                    'cwd_messaging.rabbit_mq.connection',
+                    'webmozarts_messaging.rabbit_mq.connection',
                     'old_sound_rabbit_mq.connection.'.$mergedConfig['async']['rabbit_mq']['connection']
                 );
             }
         } else {
-            $container->getDefinition('cwd_messaging.command_bus.invokes_handlers_middleware')
-                ->addTag('cwd_messaging.command_bus_middleware', ['priority' => -1000]);
-            $container->getDefinition('cwd_messaging.event_bus.invokes_handlers_middleware')
-                ->addTag('cwd_messaging.event_bus_middleware', ['priority' => -1000]);
+            $container->getDefinition('webmozarts_messaging.command_bus.invokes_handlers_middleware')
+                ->addTag('webmozarts_messaging.command_bus_middleware', ['priority' => -1000]);
+            $container->getDefinition('webmozarts_messaging.event_bus.invokes_handlers_middleware')
+                ->addTag('webmozarts_messaging.event_bus_middleware', ['priority' => -1000]);
         }
 
         if ($mergedConfig['doctrine_orm']['enabled']) {
             $loader->load('doctrine_orm.yml');
 
             $container->setParameter(
-                'cwd_messaging.doctrine_orm.entity_manager',
+                'webmozarts_messaging.doctrine_orm.entity_manager',
                 $mergedConfig['doctrine_orm']['entity_manager']
             );
         }
@@ -82,12 +82,12 @@ class CwdMessagingExtension extends ConfigurableExtension
             $loader->load('authentication.yml');
 
             $container->setParameter(
-                'cwd_messaging.authentication.anonymous_user_id',
+                'webmozarts_messaging.authentication.anonymous_user_id',
                 $mergedConfig['authentication']['anonymous_user_id']
             );
 
             $container->setAlias(
-                'cwd_messaging.authentication.user_provider',
+                'webmozarts_messaging.authentication.user_provider',
                 $mergedConfig['authentication']['user_provider']
             );
         }

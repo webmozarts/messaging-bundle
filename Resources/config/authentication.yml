@@ -1,26 +1,26 @@
 parameters:
-    cwd_messaging.authentication.anonymous_user_id: ~
+    webmozarts_messaging.authentication.anonymous_user_id: ~
 
 services:
-    cwd_messaging.authentication.user_provider:
+    webmozarts_messaging.authentication.user_provider:
         synthetic: true
 
-    cwd_messaging.command_bus.handler_invoker.authenticates_user_middleware:
-        class: Cwd\MessagingBundle\HandlerInvoker\Middleware\AuthenticatesUser
+    webmozarts_messaging.command_bus.handler_invoker.authenticates_user_middleware:
+        class: Webmozarts\MessagingBundle\HandlerInvoker\Middleware\AuthenticatesUser
         public: false
         arguments:
             - '@security.token_storage'
-            - '@cwd_messaging.authentication.user_provider'
-            - '%cwd_messaging.authentication.anonymous_user_id%'
+            - '@webmozarts_messaging.authentication.user_provider'
+            - '%webmozarts_messaging.authentication.anonymous_user_id%'
         tags:
-            - { name: cwd_messaging.command_handler_invoker_middleware, priority: 100 }
+            - { name: webmozarts_messaging.command_handler_invoker_middleware, priority: 100 }
 
-    cwd_messaging.event_bus.handler_invoker.authenticates_user_middleware:
-        class: Cwd\MessagingBundle\HandlerInvoker\Middleware\AuthenticatesUser
+    webmozarts_messaging.event_bus.handler_invoker.authenticates_user_middleware:
+        class: Webmozarts\MessagingBundle\HandlerInvoker\Middleware\AuthenticatesUser
         public: false
         arguments:
             - '@security.token_storage'
-            - '@cwd_messaging.authentication.user_provider'
-            - '%cwd_messaging.authentication.anonymous_user_id%'
+            - '@webmozarts_messaging.authentication.user_provider'
+            - '%webmozarts_messaging.authentication.anonymous_user_id%'
         tags:
-            - { name: cwd_messaging.event_handler_invoker_middleware, priority: 100 }
+            - { name: webmozarts_messaging.event_handler_invoker_middleware, priority: 100 }

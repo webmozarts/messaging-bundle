@@ -1,38 +1,38 @@
 services:
-    cwd_messaging.rabbit_mq.connection:
+    webmozarts_messaging.rabbit_mq.connection:
         synthetic: true
 
-    cwd_messaging.rabbit_mq.producer:
+    webmozarts_messaging.rabbit_mq.producer:
         class: OldSound\RabbitMqBundle\RabbitMq\Producer
         public: true
         arguments:
-            - '@cwd_messaging.rabbit_mq.connection'
+            - '@webmozarts_messaging.rabbit_mq.connection'
 
-    cwd_messaging.rabbit_mq.consumer:
-        class: Cwd\MessagingBundle\Adapter\RabbitMQ\RabbitMQMessageConsumer
+    webmozarts_messaging.rabbit_mq.consumer:
+        class: Webmozarts\MessagingBundle\Adapter\RabbitMQ\RabbitMQMessageConsumer
         public: true
         arguments:
-            - '@cwd_messaging.rabbit_mq.connection'
-            - '@cwd_messaging.asynchronous.serialized_message_consumer'
+            - '@webmozarts_messaging.rabbit_mq.connection'
+            - '@webmozarts_messaging.asynchronous.serialized_message_consumer'
 
-    cwd_messaging.rabbit_mq.publisher:
-        class: Cwd\MessagingBundle\Adapter\RabbitMQ\RabbitMQMessagePublisherSupportingAutoSetup
+    webmozarts_messaging.rabbit_mq.publisher:
+        class: Webmozarts\MessagingBundle\Adapter\RabbitMQ\RabbitMQMessagePublisherSupportingAutoSetup
         public: true
         arguments:
-            - '@cwd_messaging.rabbit_mq.producer'
+            - '@webmozarts_messaging.rabbit_mq.producer'
             - '@serializer'
-            - '@cwd_messaging.rabbit_mq.routing_key_resolver'
-            - '@cwd_messaging.rabbit_mq.delegating_additional_properties_resolver'
-            - '@cwd_messaging.channel_registry'
+            - '@webmozarts_messaging.rabbit_mq.routing_key_resolver'
+            - '@webmozarts_messaging.rabbit_mq.delegating_additional_properties_resolver'
+            - '@webmozarts_messaging.channel_registry'
 
-    cwd_messaging.asynchronous.publisher: '@cwd_messaging.rabbit_mq.publisher'
+    webmozarts_messaging.asynchronous.publisher: '@webmozarts_messaging.rabbit_mq.publisher'
 
-    cwd_messaging.rabbit_mq.delegating_additional_properties_resolver:
+    webmozarts_messaging.rabbit_mq.delegating_additional_properties_resolver:
         class: SimpleBus\Asynchronous\Properties\DelegatingAdditionalPropertiesResolver
         public: false
         arguments:
             - []
 
-    cwd_messaging.rabbit_mq.routing_key_resolver:
-        class: Cwd\MessagingBundle\Routing\ExpressionLanguageBasedRoutingKeyResolver
+    webmozarts_messaging.rabbit_mq.routing_key_resolver:
+        class: Webmozarts\MessagingBundle\Routing\ExpressionLanguageBasedRoutingKeyResolver
         public: false

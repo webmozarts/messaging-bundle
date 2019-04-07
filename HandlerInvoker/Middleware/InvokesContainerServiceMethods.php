@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the ÖWM API.
+ * This file is part of the Webmozarts Messaging Bundle.
  *
- * (c) 2016-2018 cwd.at GmbH <office@cwd.at>
+ * (c) 2016-2019 Bernhard Schussek <bernhard.schussek@webmozarts.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 
-namespace Cwd\MessagingBundle\HandlerInvoker\Middleware;
+namespace Webmozarts\MessagingBundle\HandlerInvoker\Middleware;
 
-use Cwd\MessagingBundle\HandlerDescriptor\HandlerDescriptor;
-use Cwd\MessagingBundle\HandlerDescriptor\ServiceMethodHandlerDescriptor;
+use Webmozarts\MessagingBundle\HandlerDescriptor\HandlerDescriptor;
+use Webmozarts\MessagingBundle\HandlerDescriptor\ServiceMethodHandlerDescriptor;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Webmozart\Assert\Assert;
 

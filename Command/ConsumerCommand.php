@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the ÖWM API.
+ * This file is part of the Webmozarts Messaging Bundle.
  *
- * (c) 2016-2018 cwd.at GmbH <office@cwd.at>
+ * (c) 2016-2019 Bernhard Schussek <bernhard.schussek@webmozarts.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Cwd\MessagingBundle\Command;
+namespace Webmozarts\MessagingBundle\Command;
 
 use OldSound\RabbitMqBundle\Command\BaseConsumerCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -41,9 +41,9 @@ class ConsumerCommand extends BaseConsumerCommand
     protected function initConsumer($input)
     {
         /* @var InputInterface $input */
-        $this->consumer = $this->getContainer()->get('cwd_messaging.rabbit_mq.consumer');
+        $this->consumer = $this->getContainer()->get('webmozarts_messaging.rabbit_mq.consumer');
 
-        $channelRegistry = $this->getContainer()->get('cwd_messaging.channel_registry');
+        $channelRegistry = $this->getContainer()->get('webmozarts_messaging.channel_registry');
 
         $channel = $channelRegistry->getChannel($input->getArgument('channel'));
         $partition = null !== $input->getArgument('partition')
