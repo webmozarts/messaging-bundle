@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Webmozarts\MessagingBundle\Adapter\ORM;
+namespace Webmozarts\MessagingBundle\Adapter\Doctrine\ORM;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManager;

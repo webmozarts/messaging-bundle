@@ -3,7 +3,7 @@ parameters:
 
 services:
     webmozarts_messaging.doctrine_orm.wraps_next_command_in_transaction_middleware:
-        class: Webmozarts\MessagingBundle\Adapter\ORM\WrapsMessageHandlingInTransaction
+        class: Webmozarts\MessagingBundle\Adapter\Doctrine\ORM\WrapsMessageHandlingInTransaction
         public: false
         arguments:
             - '@doctrine'
